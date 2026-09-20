@@ -1,0 +1,71 @@
+{
+  "name": "@trackee/node",
+  "version": "0.1.0",
+  "description": "Trackee's official Node.js and TypeScript SDK",
+  "author": "Trackee",
+  "license": "Apache-2.0",
+  "homepage": "https://trackee.dev",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "packageManager": "pnpm@10.30.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "spec:fetch": "node scripts/fetch-spec.mjs",
+    "generate": "openapi-ts",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "pnpm generate && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:package && pnpm exec publint && pnpm exec attw --pack .",
+    "prepublishOnly": "pnpm check",
+    "test:package": "node scripts/test-package.mjs"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@hey-api/openapi-ts": "0.99.0",
+    "@types/node": "^24.0.0",
+    "eslint": "9.39.1",
+    "prettier": "3.9.5",
+    "publint": "^0.3.0",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.64.0",
+    "vitest": "4.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trackee-API/trackee-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trackee-API/trackee-node/issues"
+  }
+}
